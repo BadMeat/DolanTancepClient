@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">DolanTancepClient</string>
+    <string name="poster">Poster</string>
+    <string name="title">Title</string>
+    <string name="date">Date</string>
+    <string name="fav">Favorite</string>
+    <string name="rate">Rate</string>
+    <string name="data_kosong">Data Kosong</string>
+    <string name="deskripsi">Deskripsi</string>
+</resources>
