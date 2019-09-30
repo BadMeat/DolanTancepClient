@@ -36,7 +36,6 @@ data class ResponseTv(
     @field:SerializedName("languages")
     val languages: List<String?>? = null,
 
-
     @field:SerializedName("poster_path")
     val posterPath: String? = null,
 

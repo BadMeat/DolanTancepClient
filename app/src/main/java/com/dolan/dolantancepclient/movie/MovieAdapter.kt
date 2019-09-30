@@ -1,4 +1,4 @@
-package com.dolan.dolantancepclient
+package com.dolan.dolantancepclient.movie
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,10 +6,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.dolan.dolantancepclient.BuildConfig
+import com.dolan.dolantancepclient.Favorite
+import com.dolan.dolantancepclient.R
+import com.dolan.dolantancepclient.getConvertDate
 import com.squareup.picasso.Picasso
 
-class FavoriteAdapter(private val listener: (Favorite?) -> Unit) :
-    RecyclerView.Adapter<FavoriteAdapter.FavoriteHolder>() {
+class MovieAdapter(private val listener: (Favorite?) -> Unit) :
+    RecyclerView.Adapter<MovieAdapter.FavoriteHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteHolder {
         return FavoriteHolder(
             LayoutInflater.from(parent.context).inflate(
@@ -32,8 +36,8 @@ class FavoriteAdapter(private val listener: (Favorite?) -> Unit) :
         favList.clear()
         if (e.isNotEmpty()) {
             favList.addAll(e)
-            notifyDataSetChanged()
         }
+        notifyDataSetChanged()
     }
 
 
@@ -47,7 +51,7 @@ class FavoriteAdapter(private val listener: (Favorite?) -> Unit) :
         fun bindItem(e: Favorite?, listener: (Favorite?) -> Unit) {
             if (e != null) {
                 txtTitle.text = e.title
-                txtDate.text = e.date
+                txtDate.text = getConvertDate(e.date)
                 txtRate.text = e.rate.toString()
                 Picasso.get().load("${BuildConfig.BASE_IMAGE}${e.poster}").into(poster)
                 itemView.setOnClickListener {

@@ -1,20 +1,15 @@
-package com.dolan.dolantancepclient.detail
+package com.dolan.dolantancepclient.movie
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dolan.dolantancepclient.movie.ResponseMovie
 
-class DetailViewModel : ViewModel(), DetailCallback {
+class MovieViewModel : ViewModel(), DetailCallback {
 
-    private val presenter = DetailPresenter(this)
+    private val presenter = MoviePresenter(this)
     private val detailData = MutableLiveData<ResponseMovie>()
 
     fun getData(id: Int?, language: String? = "en-US") {
         presenter.getData(id, language)
-    }
-
-    override fun doFinaly() {
-
     }
 
     override fun postExecute(data: ResponseMovie?) {

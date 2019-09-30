@@ -23,6 +23,15 @@ class DatabaseContract {
             .appendPath(FAV_TABLE)
             .build()
 
+        fun getContentUriDelete(id: String?): Uri {
+            return Uri.Builder()
+                .authority(AUTH)
+                .scheme(SCHEME)
+                .appendPath(FAV_TABLE)
+                .appendPath(id)
+                .build()
+        }
+
         fun getColumntInt(cursor: Cursor?, columnName: String?): Int? {
             return cursor?.getInt(cursor.getColumnIndexOrThrow(columnName))
         }

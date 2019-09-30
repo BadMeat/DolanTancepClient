@@ -40,7 +40,6 @@ data class ResponseMovie(
     @field:SerializedName("poster_path")
     val posterPath: String? = null,
 
-
     @field:SerializedName("release_date")
     val releaseDate: String? = null,
 

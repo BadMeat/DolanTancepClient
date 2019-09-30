@@ -13,12 +13,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dolan.dolantancepclient.DatabaseContract.Companion.CONTENT_URI
 import com.dolan.dolantancepclient.detail.DetailActivity
+import com.dolan.dolantancepclient.detail.DetailActivity.Companion.EXTRA_ID
+import com.dolan.dolantancepclient.detail.DetailActivity.Companion.EXTRA_TYPE
+import com.dolan.dolantancepclient.movie.MovieAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import java.lang.ref.WeakReference
 
 class MainActivity : AppCompatActivity(), FavoriteCallback {
 
-    private lateinit var favAdapter: FavoriteAdapter
+
+    private lateinit var favAdapter: MovieAdapter
 
     private lateinit var threadHandler: HandlerThread
     private lateinit var myDataObserver: DataObserver
@@ -27,8 +31,11 @@ class MainActivity : AppCompatActivity(), FavoriteCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        favAdapter = FavoriteAdapter {
-            startActivity(Intent(this, DetailActivity::class.java))
+        favAdapter = MovieAdapter {
+            val intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra(EXTRA_TYPE, it?.type)
+            intent.putExtra(EXTRA_ID, it?.id)
+            startActivity(intent)
         }
         rv_main.layoutManager = GridLayoutManager(this, 2)
         rv_main.adapter = favAdapter
@@ -36,6 +43,7 @@ class MainActivity : AppCompatActivity(), FavoriteCallback {
         threadHandler = HandlerThread("DataObserver")
         threadHandler.start()
         myDataObserver = DataObserver(this, Handler(threadHandler.looper))
+        contentResolver?.registerContentObserver(CONTENT_URI, true, myDataObserver)
         LoadAsyn(baseContext, this).execute()
     }
 

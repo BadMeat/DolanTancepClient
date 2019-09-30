@@ -1,12 +1,12 @@
-package com.dolan.dolantancepclient.detail
+package com.dolan.dolantancepclient.movie
 
-import com.dolan.dolantancepclient.movie.ResponseMovie
+import android.util.Log
 import com.dolan.dolantancepclient.network.ApiClient
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-class DetailPresenter(
+class MoviePresenter(
     private val detailCb: DetailCallback
 ) {
 
@@ -23,11 +23,14 @@ class DetailPresenter(
             ?.doFinally {
                 detailCb.postExecute(item)
             }
-            ?.subscribe {
-                if (it != null) {
-                    item = it
-                }
-            }
+            ?.subscribe(
+                { result ->
+                    if (result != null) {
+                        item = result
+                    }
+                },
+                { error -> Log.e("Error Response Movie", "$error") }
+            )
     }
 
     fun onDestroy() {
