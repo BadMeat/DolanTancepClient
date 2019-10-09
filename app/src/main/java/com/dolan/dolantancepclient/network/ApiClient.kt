@@ -3,7 +3,6 @@ package com.dolan.dolantancepclient.network
 import com.dolan.dolantancepclient.BuildConfig
 import com.dolan.dolantancepclient.movie.ResponseMovie
 import com.dolan.dolantancepclient.tv.ResponseTv
-import com.jakewharton.retrofit2.adapter.rxjava2.Result
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers

@@ -10,12 +10,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.dolan.dolantancepclient.BuildConfig
+import com.dolan.dolantancepclient.*
 import com.dolan.dolantancepclient.DatabaseContract.Companion.CONTENT_URI
 import com.dolan.dolantancepclient.DatabaseContract.Companion.getContentUriDelete
-import com.dolan.dolantancepclient.MainActivity
-import com.dolan.dolantancepclient.R
-import com.dolan.dolantancepclient.getConvertDate
 import com.dolan.dolantancepclient.movie.MovieViewModel
 import com.dolan.dolantancepclient.movie.ResponseMovie
 import com.dolan.dolantancepclient.network.TvViewModel
@@ -134,7 +131,7 @@ class DetailActivity : AppCompatActivity() {
                 contentResolver?.delete(getContentUriDelete("$id"), null, null)
                 contentResolver?.notifyChange(
                     CONTENT_URI,
-                    MainActivity.DataObserver(this, Handler())
+                    FavoriteViewModel.DataObserver(this, Handler())
                 )
                 Toast.makeText(
                     baseContext,
